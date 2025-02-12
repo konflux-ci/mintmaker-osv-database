@@ -6,7 +6,7 @@ name: Trigger osv db image build
 on:
   schedule:
     # TODO change scheudle to one per hour?
-    - cron: '0 */12 * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
