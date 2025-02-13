@@ -5,7 +5,6 @@ name: Trigger osv db image build
 
 on:
   schedule:
-    # TODO change scheudle to one per hour?
     - cron: '0 * * * *'
   workflow_dispatch:
 
@@ -13,7 +12,7 @@ permissions:
   contents: write
 
 env:
-  SOURCE_BRANCH: master
+  SOURCE_BRANCH: main
 
 jobs:
   test:
@@ -24,7 +23,7 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
       with:
-        ref: 'master'
+        ref: 'main'
     - name: create empty commit
       run: |
           git config --global user.email "<>"
