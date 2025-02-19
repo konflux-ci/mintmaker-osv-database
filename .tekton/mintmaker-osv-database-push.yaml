@@ -24,8 +24,6 @@ spec:
     value: '{{revision}}'
   - name: output-image
     value: quay.io/redhat-user-workloads/konflux-mintmaker-tenant/mintmaker-osv-database:{{revision}}
-  - name: image-expires-after
-    value: 5d
   - name: dockerfile
     value: Dockerfile
   pipelineSpec:
