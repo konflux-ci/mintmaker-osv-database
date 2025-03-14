@@ -1,0 +1,8 @@
+{
+  "tekton": {
+    "enabled": true,
+    "automergeType": "pr",
+    "automerge": true,
+    "platformAutomerge": true
+  }
+}
