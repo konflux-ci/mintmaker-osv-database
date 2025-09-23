@@ -1,0 +1,38 @@
+name: Clean stale OSV-DB from Quay repositories
+
+on:
+  schedule:
+    - cron: '01 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: checkout repo content
+      uses: actions/checkout@v4
+      with:
+        ref: osv-db-images-cleanup 
+
+    - name: setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: install skopeo 
+      run: |
+        sudo apt install -y skopeo
+    
+
+    - name: install python packages
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    
+    - name: run cleanup script
+      env:
+        QUAY_API_KEY: $ {{ secrets.QUAY_API_KEY }}
+        QUAY_ROBOT_USERNAME: ${{ secrets.QUAY_ROBOT_USERNAME }}
+        QUAY_ROBOT_PASSWORD: ${{ secrets.QUAY_ROBOT_PASSWORD }}
+      run: python3 cleanup.py
