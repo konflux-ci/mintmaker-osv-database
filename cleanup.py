@@ -54,6 +54,7 @@ def get_tags_repo(repo):
     repo_tags = []
 
     while True:
+
         url = repo_tags_url(repo)
         resp = requests.get(url, 
                             params={"page": pages, 
@@ -95,4 +96,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
