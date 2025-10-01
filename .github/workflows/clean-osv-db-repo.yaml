@@ -20,12 +20,19 @@ jobs:
       with:
         python-version: '3.12'
     
+    - name: install skopeo 
+      run: |
+        sudo apt install -y skopeo
+    
+
     - name: install python packages
       run: |
         python -m pip install --upgrade pip
         pip install requests
-        
+    
     - name: run cleanup script
       env:
-        QUAY_API_KEY: ${{ secrets.QUAY_API_KEY }}
+        QUAY_API_KEY: $ {{ secrets.QUAY_API_KEY }}
+        QUAY_ROBOT_USERNAME: ${{ secrets.QUAY_ROBOT_USERNAME }}
+        QUAY_ROBOT_PASSWORD: ${{ secrets.QUAY_ROBOT_PASSWORD }}
       run: python3 cleanup.py
