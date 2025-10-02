@@ -13,7 +13,7 @@ jobs:
     - name: checkout repo content
       uses: actions/checkout@v4
       with:
-        ref: osv-db-images-cleanup 
+        ref: main
 
     - name: setup python
       uses: actions/setup-python@v4

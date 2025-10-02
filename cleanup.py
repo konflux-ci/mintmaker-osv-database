@@ -8,7 +8,7 @@ QUAY_ROBOT_PASSWORD = os.environ["QUAY_ROBOT_PASSWORD"]
 KEEP = 24 * 7  # Keep images for a week
 LIMIT = 250
 
-repos = ["konflux-ci/mintmaker-osv-database", "redhat-user-workloads/konflux-mintmaker-tenant/mintmaker-osv-database"]
+repos = ["redhat-user-workloads/konflux-mintmaker-tenant/mintmaker-osv-database"]
 repo_tags_url = lambda repo: f"https://quay.io/api/v1/repository/{repo}/tag"
 repo_delete_tag_url = lambda repo, tag: f"docker://quay.io/{repo}:{tag}"
 
@@ -29,25 +29,29 @@ def skopeo_login(registry, username, password):
     except subprocess.CalledProcessError as e:
         print("❌ Login failed")
         print(e.stderr)
-    return result.returncode
 
 
 def skopeo_delete_tag(repo, tag):
     img_url = repo_delete_tag_url(repo, tag)
     try:
         result = subprocess.run(
-            ["skopeo", "delete", img_url],
+            ["skopeo", "delete", img_url,
+                "--username", QUAY_ROBOT_USERNAME,
+                "--password", QUAY_ROBOT_PASSWORD
+             ],
             check=True,
             text=True,
             capture_output=True
         )
         print(f"✅ Deleted tag {tag}")
         print(result.stdout)
+        return result.returncode
     except subprocess.CalledProcessError as e:
         print(f"❌ Failed to delete {tag}")
         print(e.stderr)
+        return 1
     
-    return result.returncode
+
 
 def get_tags_repo(repo):
     pages = 1
