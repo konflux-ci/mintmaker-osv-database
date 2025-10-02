@@ -90,9 +90,9 @@ def main():
         print(f"Fetching stale tags for repo {repo}")
         tags = get_tags_repo(repo)
         skopeo_login("quay.io", QUAY_ROBOT_USERNAME, QUAY_ROBOT_PASSWORD)
+
         delete_tags(repo, tags[KEEP:])
 
 
 if __name__ == "__main__":
     main()
-
