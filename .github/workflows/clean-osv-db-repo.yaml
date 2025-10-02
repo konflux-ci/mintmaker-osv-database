@@ -32,7 +32,7 @@ jobs:
     
     - name: run cleanup script
       env:
-        QUAY_API_KEY: $ {{ secrets.QUAY_API_KEY }}
+        QUAY_API_KEY: ${{ secrets.QUAY_API_KEY }}
         QUAY_ROBOT_USERNAME: ${{ secrets.QUAY_ROBOT_USERNAME }}
         QUAY_ROBOT_PASSWORD: ${{ secrets.QUAY_ROBOT_PASSWORD }}
       run: python3 cleanup.py

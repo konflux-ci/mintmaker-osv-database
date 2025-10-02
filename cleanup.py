@@ -54,7 +54,6 @@ def get_tags_repo(repo):
     repo_tags = []
 
     while True:
-
         url = repo_tags_url(repo)
         resp = requests.get(url, 
                             params={"page": pages, 
@@ -90,7 +89,8 @@ def main():
     for repo in repos:
         print(f"Fetching stale tags for repo {repo}")
         tags = get_tags_repo(repo)
-        skopeo_login("quai.io", QUAY_ROBOT_USERNAME, QUAY_ROBOT_PASSWORD)
+        skopeo_login("quay.io", QUAY_ROBOT_USERNAME, QUAY_ROBOT_PASSWORD)
+
         delete_tags(repo, tags[KEEP:])
 
 
