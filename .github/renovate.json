@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "helpers:pinGitHubActionDigestsToSemver"
+  ],
   "tekton": {
     "enabled": true,
     "automergeType": "pr",
