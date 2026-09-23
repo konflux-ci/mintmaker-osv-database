@@ -2,7 +2,7 @@ FROM quay.io/konflux-ci/mintmaker:latest as builder
 RUN /osv-generator -destination-dir /tmp/osv-db -container-filename docker.nedb -rpm-filename rpm.nedb -days 120
 RUN rm -f /tmp/osv-db/osv-offline.zip
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal:latest@sha256:7b8e25a1b56ca4d00219198f3b5b51a3e1693a5c4f5369c5e190d7d6cb3f980e
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest@sha256:8ebe2ad8fdf3cab3e5a53c1edc69194c98209cfadab24b884f4ad9ebcf7bbbfc
 WORKDIR /
 COPY --from=builder /tmp/osv-db /data/osv-db
 
